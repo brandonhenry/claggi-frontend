@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const config = require('./webpack.config');
 const path = require('path');
+const cors = require('cors')
 
 const express = require('express');
 const OktaJwtVerifier = require('@okta/jwt-verifier');
@@ -13,14 +14,6 @@ const oktaJwtVerifier = new OktaJwtVerifier({
     clientId: clientId
 });
 
-import { Security, ImplicitCallback } from '@okta/okta-react';
-
-const oktaConfig = {
-    issuer: `${oktaDomain}/oauth2/default`,
-    redirect_uri: window.location.origin + '/implicit/callback',
-    client_id: clientId
-}
-
 const app = express();
 const port = 3000;
 
@@ -30,6 +23,8 @@ app.use(require('webpack-dev-middleware')(compiler, {
     noInfo: true,
     publicPath: config.output.publicPath
 }));
+
+app.use(cors());
 
 // public route
 app.get('/api/publicInfo', (req, res) => {
