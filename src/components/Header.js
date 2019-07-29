@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link, Route } from 'react-router-dom';
 import { SecureRoute, ImplicitCallback } from '@okta/okta-react'
 import AdminDashboard from "./AdminDashboard";
+import LoginView from "./LoginView";
 
 export default class Header extends Component {
     render() {
@@ -12,7 +13,7 @@ export default class Header extends Component {
                         <ul className="nav navbar-nav">
                             <li><Link to="/">Home</Link></li>
                             <li><Link to="/admin">Dashboard</Link></li>
-                            <li><Route exact path="/" component={Login}/></li>
+                            <li><Route exact path="/" component={LoginView}/></li>
                             <li><SecureRoute exact path="/admin" component={AdminDashboard}/></li>
                             <li><SecureRoute exact path="/implicit/callback" component={ImplicitCallback}/></li>
                         </ul>
