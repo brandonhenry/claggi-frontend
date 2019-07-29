@@ -34,11 +34,11 @@ app.get('/api/profile', verifyToken, (req, res) => {
 });
 
 app.get('/css/bootstrap.min.css', function (req, res) {
-    res.sendFile(path.join(__dirname, 'build/css/bootstrap.min.css'));
+    res.sendFile(path.join(__dirname, 'src/css/bootstrap.min.css'));
 });
 
 app.get('*', function (req, res) {
-    res.sendFile(path.join(__dirname, 'build/index.html'));
+    res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
 function verifyToken(req, res, next) {
@@ -55,4 +55,4 @@ function verifyToken(req, res, next) {
     }
 }
 
-app.listen(port, () => console.log(`Listening on ${port}!`))
+app.listen(port, () => console.log(`Listening on port: ${port}!`))
