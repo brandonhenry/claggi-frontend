@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router';
-import DocumentTitle from 'react-document-title';
+import { connect } from 'react-redux';
+import { setHasError } from '../actions/windowActions';
 
 import Header from './Header';
 import {withAuth} from "@okta/okta-react";
 
-export default withAuth(class is extends Component {
+export default withAuth(class App extends Component {
     constructor(props) {
         super(props);
         this.state = { authenticated: null };
@@ -38,14 +39,18 @@ export default withAuth(class is extends Component {
 
     render() {
         return (
-            <DocumentTitle title='My React App'>
-                <div className='MasterPage'>
-                    <Header />
-                    { this.props.children }
-                    {this.state.authenticated ?
-                    <button onClick={ this.logout}>Logout</button> : <button onClick={this.login}>Login</button> };
-                </div>
-            </DocumentTitle>
+            <div className='app'>
+                <Header />
+                { this.props.children }
+                {this.state.authenticated ?
+                <button onClick={ this.logout}>Logout</button> : <button onClick={this.login}>Login</button> };
+            </div>
         );
     }
 })
+
+const mapStateToProps = state =>  ({
+    hasError: state.window.hasError
+});
+
+export default connect(mapStateToProps, { setHasError })(App)

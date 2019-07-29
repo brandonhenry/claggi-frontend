@@ -1,5 +1,3 @@
-const webpack = require('webpack');
-const config = require('./webpack.config');
 const path = require('path');
 const cors = require('cors')
 
@@ -16,13 +14,6 @@ const oktaJwtVerifier = new OktaJwtVerifier({
 
 const app = express();
 const port = 3000;
-
-const compiler = webpack(config);
-
-app.use(require('webpack-dev-middleware')(compiler, {
-    noInfo: true,
-    publicPath: config.output.publicPath
-}));
 
 app.use(cors());
 
@@ -64,4 +55,4 @@ function verifyToken(req, res, next) {
     }
 }
 
-app.listen(port, () => console.log(`My App listening on port ${port}!`))
+app.listen(port, () => console.log(`Listening on ${port}!`))
