@@ -2,24 +2,31 @@ import React, { Component } from 'react';
 import { Link, Route } from 'react-router-dom';
 import { SecureRoute, ImplicitCallback } from '@okta/okta-react'
 import AdminDashboard from "./AdminDashboard";
-import LoginView from "./LoginView";
+import LoginView from "./Login";
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import Form from "react-bootstrap/Form";
+import FormControl from "react-bootstrap/es/FormControl";
+import Button from "react-bootstrap/Button";
 
 export default class Header extends Component {
     render() {
         return (
-            <nav className="navbar navbar-default navbar-static-top">
-                <div className="container">
-                    <div>
-                        <ul className="nav navbar-nav">
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to="/admin">Dashboard</Link></li>
-                            <li><Route exact path="/" component={LoginView}/></li>
-                            <li><SecureRoute exact path="/admin" component={AdminDashboard}/></li>
-                            <li><SecureRoute exact path="/implicit/callback" component={ImplicitCallback}/></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+            <Navbar bg="light" expand="lg">
+                <Navbar.Brand href="#home">Claggi Ebay Manager</Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="mr-auto">
+                        <Nav.Link href="/">Home</Nav.Link>
+                        <Nav.Link href="/admin">Dashboard</Nav.Link>
+                    </Nav>
+                    <Form inline>
+                        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+                        <Button variant="outline-success">Search</Button>
+                    </Form>
+                </Navbar.Collapse>
+            </Navbar>
         );
     }
 }

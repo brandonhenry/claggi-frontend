@@ -1,24 +1,26 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { setHasError } from '../actions/windowActions';
+import { setAuth } from '../actions/rootActions';
 
 import Header from './Header';
-import LoginView from "./LoginView";
+import LoginView from "./Login";
+import AdminDashboard from "./AdminDashboard";
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
     render() {
         return (
             <div className='app'>
                 <Header />
-                <LoginView />
-                { this.props.children }
+                {this.props.auth ? <AdminDashboard/> : <LoginView />}
             </div>
         );
     }
 }
 
 const mapStateToProps = state =>  ({
-    hasError: state.window.hasError
+    auth: state.authentication
 });
 
-export default connect(mapStateToProps, { setHasError })(App)
+export default connect(mapStateToProps, { setAuth })(App)
