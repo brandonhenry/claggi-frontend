@@ -1,10 +1,7 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux';
-import { setAuth } from '../actions/rootActions';
-
-import Header from './Header';
-import LoginView from "./Login";
-import AdminDashboard from "./AdminDashboard";
+import Header from "./Header";
+import Login from "./Login";
+import Footer from "./Footer";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -12,15 +9,12 @@ class App extends Component {
     render() {
         return (
             <div className='app'>
-                <Header />
-                {this.props.auth ? <AdminDashboard/> : <LoginView />}
+                <Header/>
+                <Login/>
+                <Footer/>
             </div>
         );
     }
 }
 
-const mapStateToProps = state =>  ({
-    auth: state.authentication
-});
-
-export default connect(mapStateToProps, { setAuth })(App)
+export default App

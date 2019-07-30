@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { Link, Route } from 'react-router-dom';
 import { SecureRoute, ImplicitCallback } from '@okta/okta-react'
-import AdminDashboard from "./AdminDashboard";
-import LoginView from "./Login";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/es/FormControl";
 import Button from "react-bootstrap/Button";
