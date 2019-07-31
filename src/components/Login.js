@@ -29,6 +29,7 @@ class Login extends Component {
 
         if (authenticated !== false){
             const user = await this.props.auth.getUser();
+            console.log(user);
         } else {
             console.log("User is not authenticated!")
         }

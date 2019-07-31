@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
-import {DASHBOARD, LOGIN} from "../constants/views";
+import {DASHBOARD} from "../constants/views";
 import AdminDashboard from "./AdminDashboard";
 import Login from "./Login";
 
@@ -16,10 +16,7 @@ function Display(props){
 
 class MainView extends Component {
     render() {
-        {
-            return this.props.authenticated ? <Display view={this.props.view}/> : <Login/>;
-        }
-
+        return this.props.authenticated ? <Display view={this.props.view}/> : <Login/>;
     }
 }
 
