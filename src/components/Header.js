@@ -9,6 +9,7 @@ import FormControl from "react-bootstrap/es/FormControl";
 import Button from "react-bootstrap/Button";
 import {setView} from '../actions/viewActions'
 import {DASHBOARD, HOME} from "../constants/views";
+import {store} from '../store'
 
 class Header extends Component {
     render() {
@@ -18,8 +19,8 @@ class Header extends Component {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
-                        <Nav.Link onClick={() => { setView(HOME) }}>Home</Nav.Link>
-                        <Nav.Link onClick={() => { setView(DASHBOARD) }}>Dashboard</Nav.Link>
+                        <Nav.Link onClick={() => { setView(HOME)(store.dispatch, store.getState) }}>Home</Nav.Link>
+                        <Nav.Link onClick={() => { setView(DASHBOARD)(store.dispatch, store.getState) }}>Dashboard</Nav.Link>
                         <Nav.Link>Listings</Nav.Link>
                         <Nav.Link>Orders</Nav.Link>
                         <Nav.Link>Settings</Nav.Link>

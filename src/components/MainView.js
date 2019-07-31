@@ -24,7 +24,7 @@ MainView.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    view: state.view
+    view: state.view.view
 });
 
 export default connect(mapStateToProps, null)(MainView)
