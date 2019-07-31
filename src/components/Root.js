@@ -5,15 +5,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { BrowserRouter } from 'react-router-dom'
 import App from './App'
 import { Security } from '@okta/okta-react';
-
-const clientId = "0oa1047vvhR9PytaF357";
-const oktaDomain = "https://dev-499390.okta.com";
-
-const config = {
-    issuer: `${oktaDomain}/oauth2/default`,
-    redirect_uri: window.location.origin + '/implicit/callback',
-    client_id: clientId
-};
+import config from '../constants/config'
 
 class Root extends Component {
     render() {

@@ -1,23 +1,26 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import {withAuth} from '@okta/okta-react';
-import Card from "react-bootstrap/Card";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+import {setAuth} from '../actions/viewActions'
+import AdminDashboard from "./AdminDashboard";
+import LoginForm from "./LoginForm";
+import config from '../constants/config'
 
 class Login extends Component {
     constructor(props) {
         super(props);
-        this.state = { authenticated: null };
         this.checkAuthentication = this.checkAuthentication.bind(this);
         this.checkAuthentication();
         this.login = this.login.bind(this);
         this.logout = this.logout.bind(this);
+        this.onSuccess = this.onSuccess.bind(this);
+        this.onError = this.onError.bind(this);
     }
 
     async checkAuthentication() {
         const authenticated = await this.props.auth.isAuthenticated();
-        if (authenticated !== this.state.authenticated) {
-            this.setState({ authenticated });
+        if (authenticated !== this.props.authenticated) {
+            setAuth(authenticated);
         }
     }
 
@@ -45,35 +48,30 @@ class Login extends Component {
         this.props.auth.logout('/');
     }
 
-    render(){
-        return (
-            <Card className="text-center mx-auto" style={{ width: '18rem' }}>
-                <Card.Title>Sign In</Card.Title>
-                <Card.Body>
-                    <Form>
-                        <Form.Group controlId="formBasicEmail">
-                            <Form.Label>Email address</Form.Label>
-                            <Form.Control type="email" placeholder="Enter email" />
-                            <Form.Text className="text-muted">
-                                We'll never share your email with anyone else.
-                            </Form.Text>
-                        </Form.Group>
+    onSuccess(res) {
+        if (res.status === 'SUCCESS') {
+            return this.props.auth.redirect({
+                sessionToken: res.session.token
+            });
+        } else {
+            // The user can be in another authentication state that requires further action.
+            // For more information about these states, see:
+            //   https://github.com/okta/okta-signin-widget#rendereloptions-success-error
+        }
+    }
 
-                        <Form.Group controlId="formBasicPassword">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password" />
-                        </Form.Group>
-                        <Form.Group controlId="formBasicChecbox">
-                            <Form.Check type="checkbox" label="Check me out" />
-                        </Form.Group>
-                        <Button variant="primary" type="submit">
-                            Login
-                        </Button>
-                    </Form>
-                </Card.Body>
-            </Card>
-        )
+    onError(err) {
+        console.log('error logging in', err);
+    }
+
+
+    render(){
+        return this.props.authenticated ? <AdminDashboard/> : <LoginForm baseUrl={config.baseUrl} onSuccess={this.onSuccess} onError={this.onError}/>
     }
 }
 
-export default withAuth(Login)
+const mapStateToProps = state => ({
+    authenticated: state.view.authenticated
+});
+
+export default connect(mapStateToProps, null)(withAuth(Login))

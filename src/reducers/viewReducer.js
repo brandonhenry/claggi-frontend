@@ -1,8 +1,9 @@
-import {HOME} from "../constants/views";
-import {SET_VIEW} from "../constants/types";
+import {LOGIN} from "../constants/views";
+import {SET_AUTH, SET_VIEW} from "../constants/types";
 
 const initialState = {
-    view: HOME
+    view: LOGIN,
+    authenticated: false
 };
 
 export default function(state = initialState, action){
@@ -12,6 +13,11 @@ export default function(state = initialState, action){
             return {
                 ...state,
                 view: action.payload
+            };
+        case SET_AUTH:
+            return {
+                ...state,
+                authenticated: action.payload
             };
         default:
             return state;
