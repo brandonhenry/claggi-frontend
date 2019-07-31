@@ -9,6 +9,8 @@ import config from '../constants/config'
 class Login extends Component {
     constructor(props) {
         super(props);
+
+        console.log(this.props.auth)
         this.checkAuthentication = this.checkAuthentication.bind(this);
         this.checkAuthentication();
         this.login = this.login.bind(this);
@@ -19,8 +21,9 @@ class Login extends Component {
 
     async checkAuthentication() {
         const authenticated = await this.props.auth.isAuthenticated();
+        console.log(authenticated !== this.props.authenticated)
         if (authenticated !== this.props.authenticated) {
-            setAuth(authenticated);
+            this.props.setAuth(authenticated);
         }
     }
 
@@ -75,4 +78,4 @@ const mapStateToProps = state => ({
     authenticated: state.view.authenticated
 });
 
-export default connect(mapStateToProps, null)(withAuth(Login))
+export default connect(mapStateToProps, {setAuth})(withAuth(Login))

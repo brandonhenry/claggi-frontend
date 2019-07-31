@@ -14,8 +14,8 @@ class Root extends Component {
               <Provider store={ store }>
                   <PersistGate loading={ <div> Loading...</div> } persistor={ persistor }>
                       <Security issuer={config.issuer} client_id={config.client_id} redirect_uri={config.redirect_uri}>
+                        <Route path="/" component={App}/>
                         <Route path='/implicit/callback' component={ImplicitCallback}/>
-                        <App/>
                       </Security>
                   </PersistGate>
               </Provider>

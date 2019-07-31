@@ -14,7 +14,7 @@ class Header extends Component {
     render() {
         return (
             <Navbar bg="light" expand="lg">
-                <Navbar.Brand href="#home">Claggi Ebay Manager</Navbar.Brand>
+                <Navbar.Brand href="/">Claggi Ebay Manager</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
