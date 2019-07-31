@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
-import windowReducer from './windowReducer'
+import viewReducer from "./viewReducer";
 
 export default combineReducers({
-    window: windowReducer
+    view: viewReducer
 })
