@@ -1,20 +1,21 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux'
 import Header from "./Header";
-import Login from "./Login";
 import Footer from "./Footer";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import MainView from "./MainView";
 
 class App extends Component {
     render() {
         return (
             <div className='app'>
                 <Header/>
-                <Login/>
+                <MainView/>
                 <Footer/>
             </div>
         );
     }
 }
 
-export default App
+export default connect()(App)
