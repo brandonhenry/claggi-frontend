@@ -20,6 +20,10 @@ class Header extends Component {
                     <Nav className="mr-auto">
                         <Nav.Link onClick={() => { setView(HOME) }}>Home</Nav.Link>
                         <Nav.Link onClick={() => { setView(DASHBOARD) }}>Dashboard</Nav.Link>
+                        <Nav.Link>Listings</Nav.Link>
+                        <Nav.Link>Orders</Nav.Link>
+                        <Nav.Link>Settings</Nav.Link>
+                        <Nav.Link>Logout</Nav.Link>
                     </Nav>
                     <Form inline>
                         <FormControl type="text" placeholder="Search" className="mr-sm-2" />
