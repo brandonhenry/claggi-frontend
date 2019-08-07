@@ -7,7 +7,7 @@ import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/es/FormControl";
 import Button from "react-bootstrap/Button";
 import {setView} from '../actions/viewActions'
-import {DASHBOARD, LOGIN} from "../constants/views";
+import {DASHBOARD, LOGIN, SETTINGS} from "../constants/views";
 import {store} from '../store'
 
 class Header extends Component {
@@ -29,7 +29,7 @@ class Header extends Component {
                             <Nav.Link onClick={() => { setView(DASHBOARD)(store.dispatch, store.getState) }}>Dashboard</Nav.Link>
                             <Nav.Link>Listings</Nav.Link>
                             <Nav.Link>Orders</Nav.Link>
-                            <Nav.Link>Settings</Nav.Link>
+                            <Nav.Link onClick={() => { setView(SETTINGS)(store.dispatch, store.getState) }}>Settings</Nav.Link>
                             <Nav.Link onClick={() => { this.props.auth.logout('/')} }>Logout</Nav.Link>
                             </>
                     }
